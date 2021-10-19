@@ -7,17 +7,24 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
-import { createUser } from './services/userAPI';
+import { createUser, getUser } from './services/userAPI';
+import Header from './components/Header';
 
 class App extends React.Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
+    this.getName = this.getName.bind(this);
     this.state = {
       name: '',
       loading: false,
       namePromisse: false,
+      nameHeaderLoaded: false,
     };
+  }
+
+  componentDidMount() {
+    this.getName();
   }
 
   onInputChange({ target }) {
@@ -28,15 +35,24 @@ class App extends React.Component {
     });
   }
 
+  async getName() {
+    const { name } = await getUser();
+    this.setState({
+      name,
+      nameHeaderLoaded: true,
+    });
+  }
+
   loadFunction = async () => {
     const { name } = this.state;
     this.setState({ loading: true });
     await createUser({ name });
     this.setState({ namePromisse: true });
+    await this.setState({ loading: false });
   }
 
   render() {
-    const { name, loading, namePromisse } = this.state;
+    const { name, loading, namePromisse, nameHeaderLoaded } = this.state;
     return (
       <BrowserRouter>
         <p>TrybeTunes</p>
@@ -51,7 +67,9 @@ class App extends React.Component {
             />
           </Route>
           <Route exact path="/search">
-            <Search />
+            <Search
+              name={ name }
+            />
           </Route>
           <Route exact path="/album/:id">
             <Album />
@@ -64,6 +82,12 @@ class App extends React.Component {
           </Route>
           <Route exact path="/profile/edit">
             <ProfileEdit />
+          </Route>
+          <Route exact path="/Header">
+            <Header
+              name={ name }
+              nameHeaderLoaded={ nameHeaderLoaded }
+            />
           </Route>
           <Route path="*" component={ NotFound } />
         </Switch>

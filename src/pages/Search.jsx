@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 class Search extends Component {
   render() {
-    return <div data-testid="page-search">Search</div>;
+    return (
+      <div data-testid="page-search">
+        <Header />
+        <h1>Search</h1>
+        {/* {console.log('nome', name)} */}
+      </div>
+    );
   }
 }
 

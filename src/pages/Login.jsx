@@ -32,11 +32,6 @@ class Login extends Component {
               data-testid="login-submit-button"
               disabled={ name.length < '3' }
               onClick={ loadFunction }
-              // onClick={ async () => {
-              //   <Carregando />;
-              //   await createUser({ name })
-              //     .then(<Redirect to="/search" />);
-              // } }
             >
               Entrar
             </button>
