@@ -7,6 +7,7 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
+import { createUser } from './services/userAPI';
 
 class App extends React.Component {
   constructor() {
@@ -14,6 +15,8 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.state = {
       name: '',
+      loading: false,
+      namePromisse: false,
     };
   }
 
@@ -25,14 +28,27 @@ class App extends React.Component {
     });
   }
 
-  render() {
+  loadFunction = async () => {
     const { name } = this.state;
+    this.setState({ loading: true });
+    await createUser({ name });
+    this.setState({ namePromisse: true });
+  }
+
+  render() {
+    const { name, loading, namePromisse } = this.state;
     return (
       <BrowserRouter>
         <p>TrybeTunes</p>
         <Switch>
           <Route exact path="/">
-            <Login name={ name } onInputChange={ this.onInputChange } />
+            <Login
+              name={ name }
+              onInputChange={ this.onInputChange }
+              loadFunction={ this.loadFunction }
+              loading={ loading }
+              namePromisse={ namePromisse }
+            />
           </Route>
           <Route exact path="/search">
             <Search />
@@ -49,9 +65,7 @@ class App extends React.Component {
           <Route exact path="/profile/edit">
             <ProfileEdit />
           </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
+          <Route path="*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
     );
