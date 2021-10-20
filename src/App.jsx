@@ -17,6 +17,7 @@ class App extends React.Component {
     this.getName = this.getNameHeader.bind(this);
     this.state = {
       name: '',
+      artistName: '',
       loading: false,
       namePromisse: false,
       nameHeaderLoaded: false,
@@ -52,7 +53,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { name, loading, namePromisse, nameHeaderLoaded } = this.state;
+    const { name, artistName, loading, namePromisse, nameHeaderLoaded } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -68,7 +69,9 @@ class App extends React.Component {
           <Route exact path="/search">
             <Search
               name={ name }
+              artistName={ artistName }
               nameHeaderLoaded={ nameHeaderLoaded }
+              onInputChange={ this.onInputChange }
             />
           </Route>
           <Route exact path="/album/:id">
