@@ -46,6 +46,7 @@ class Search extends Component {
                     className="track-image"
                   />
                   <p>{elem.collectionName}</p>
+                  {/* <p>{elem.releaseDate}</p> */}
                   <p>{`Price ${elem.collectionPrice}`}</p>
                 </div>
 
@@ -64,13 +65,6 @@ class Search extends Component {
       [name]: value,
     });
   }
-
-  // artistFunction = () => {
-  //   const { artistName } = this.state;
-  //   this.setState({ artistNameSaved: artistName, loadingCollection: true });
-  //   this.setState({ artistName: '' });
-  //   // console.log(artistNameSaved);
-  // }
 
   render() {
     const { artistName, artistNameSaved, loadingCollection } = this.state;
