@@ -79,6 +79,7 @@ class App extends React.Component {
           </Route>
           <Route exact path="/favorites">
             <Favorites
+              name={ name }
               nameHeaderLoaded={ nameHeaderLoaded }
             />
           </Route>

@@ -1,6 +1,6 @@
 .title-user {
   align-items: center;
-  background-color: rgba(3,107,82);
+  background-color: rgba(3, 107, 82);
   border: 2px solid black;
   color: aliceblue;
   display: flex;
@@ -9,7 +9,7 @@
 
 .links-nav {
   align-items: center;
-  background-color:rgb(143, 229, 209);
+  background-color: rgb(143, 229, 209);
   display: flex;
   justify-content: center;
 }
