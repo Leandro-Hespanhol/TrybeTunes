@@ -1,23 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Loading from './Loading';
+import './Header.css';
 
 class Header extends Component {
   render() {
     const { name, nameHeaderLoaded } = this.props;
     if (nameHeaderLoaded) {
       return (
-        <div data-testid="page-Header">
-          <p>TrybeTunes</p>
-          <header data-testid="header-component">
+        <header data-testid="header-component" className="header-header">
+          <div className="title-user">
+            <p>TrybeTunes</p>
             <h1 data-testid="header-user-name">
-              Bem vinda
+              Bem vind@
               {' '}
-              { name }
-              {/* {console.log('header', this.props)} */}
+              {name}
             </h1>
-          </header>
-        </div>
+          </div>
+          <nav className="links-nav">
+            <div>
+              <Link to="/search" data-testid="link-to-search">
+                Search
+              </Link>
+            </div>
+            <div>
+              <Link to="/favorites" data-testid="link-to-favorites">
+                {' '}
+                Favorites
+              </Link>
+            </div>
+            <div>
+              <Link to="/profile" data-testid="link-to-profile">
+                {' '}
+                Profile
+              </Link>
+            </div>
+          </nav>
+        </header>
       );
     }
     return <Loading />;

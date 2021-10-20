@@ -1,0 +1,22 @@
+.title-user {
+  align-items: center;
+  background-color: turquoise;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+.links-nav {
+  align-items: center;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+}
+
+.links-nav div {
+  /* align-items: center; */
+  border: 1.5px solid white;
+  flex-grow: 1;
+  text-align: center;
+  /* justify-content: center; */
+}

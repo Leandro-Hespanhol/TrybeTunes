@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
-    this.getName = this.getName.bind(this);
+    this.getName = this.getNameHeader.bind(this);
     this.state = {
       name: '',
       loading: false,
@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getName();
+    this.getNameHeader();
   }
 
   onInputChange({ target }) {
@@ -35,7 +35,7 @@ class App extends React.Component {
     });
   }
 
-  async getName() {
+  async getNameHeader() {
     const { name } = await getUser();
     this.setState({
       name,
