@@ -55,7 +55,6 @@ class App extends React.Component {
     const { name, loading, namePromisse, nameHeaderLoaded } = this.state;
     return (
       <BrowserRouter>
-        <p>TrybeTunes</p>
         <Switch>
           <Route exact path="/">
             <Login
@@ -69,19 +68,31 @@ class App extends React.Component {
           <Route exact path="/search">
             <Search
               name={ name }
+              nameHeaderLoaded={ nameHeaderLoaded }
             />
           </Route>
           <Route exact path="/album/:id">
-            <Album />
+            <Album
+              name={ name }
+              nameHeaderLoaded={ nameHeaderLoaded }
+            />
           </Route>
           <Route exact path="/favorites">
-            <Favorites />
+            <Favorites
+              nameHeaderLoaded={ nameHeaderLoaded }
+            />
           </Route>
           <Route exact path="/profile">
-            <Profile />
+            <Profile
+              name={ name }
+              nameHeaderLoaded={ nameHeaderLoaded }
+            />
           </Route>
           <Route exact path="/profile/edit">
-            <ProfileEdit />
+            <ProfileEdit
+              name={ name }
+              nameHeaderLoaded={ nameHeaderLoaded }
+            />
           </Route>
           <Route exact path="/Header">
             <Header

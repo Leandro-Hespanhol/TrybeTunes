@@ -8,11 +8,14 @@ class Header extends Component {
     if (nameHeaderLoaded) {
       return (
         <div data-testid="page-Header">
+          <p>TrybeTunes</p>
           <header data-testid="header-component">
-            Bem vinda
-            {' '}
-            {name}
-            {console.log('nome', name)}
+            <h1 data-testid="header-user-name">
+              Bem vinda
+              {' '}
+              { name }
+              {/* {console.log('header', this.props)} */}
+            </h1>
           </header>
         </div>
       );
