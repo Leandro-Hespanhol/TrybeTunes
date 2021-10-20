@@ -1,41 +1,65 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Header from '../components/Header';
-// import getAlbumsAPI from '../services/searchAlbumsAPI';
+// import TrackCard from '../components/TrackCard';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
+  constructor() {
+    super();
+    this.state = {
+      artistName: '',
+      artistNameSaved: '',
+    };
+  }
+
+  // componentDidMount() {
+  //   this.getAlbum('pink');
+  // }
+
+  // getAlbum = (artist) => {
+  //   searchAlbumsAPI(artist)
+  //     .then((resp) => console.log(resp));
+  // }
+
+  onInputChange = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  artistFunction = () => {
+    const { artistName } = this.state;
+    this.setState({ artistNameSaved: artistName });
+    this.setState({ artistName: '' });
+    // console.log(artistNameSaved);
+  }
+
   render() {
-    const {
-      name,
-      artistName,
-      artistFunction,
-      nameHeaderLoaded,
-      onInputChange,
-      artistNameSaved,
-      artistCollection
-    } = this.props;
+    const { artistName, artistNameSaved } = this.state;
     return (
       <div data-testid="page-search">
-        <Header name={ name } nameHeaderLoaded={ nameHeaderLoaded } />
-        <div data-testid="page-login">
-          <form action="GET">
+        <Header />
+        <div>
+          <form action="">
             <label htmlFor="search-input">
               <input
                 data-testid="search-artist-input"
                 type="text"
                 name="artistName"
                 value={ artistName }
-                onChange={ onInputChange }
+                onChange={ this.onInputChange }
                 placeholder="Pesquise o artista"
               />
               <button
                 type="button"
                 data-testid="search-artist-button"
                 disabled={ artistName.length < '2' }
-                onClick={ artistFunction }
+                onClick={ this.artistFunction }
               >
                 Pesquisar
-                {/* {console.log('SEARCH', getAlbumsAPI)} */}
               </button>
             </label>
           </form>
@@ -46,7 +70,7 @@ class Search extends Component {
           { artistNameSaved }
         </div>
         <div>
-          { artistCollection }
+          {/* <TrackCard artistCollection={ artistCollection } /> */}
         </div>
       </div>
     );
@@ -54,13 +78,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-Search.propTypes = {
-  name: PropTypes.string.isRequired,
-  artistName: PropTypes.string.isRequired,
-  artistNameSaved: PropTypes.string.isRequired,
-  nameHeaderLoaded: PropTypes.bool.isRequired,
-  onInputChange: PropTypes.func.isRequired,
-  artistFunction: PropTypes.func.isRequired,
-  // artistCollection: PropTypes.array.isRequired,
-};

@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
+import { getUser } from '../services/userAPI';
 import './Header.css';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: '',
+      loadingUser: false,
+    };
+  }
+
+  componentDidMount() {
+    this.getNameHeader();
+  }
+
+  getNameHeader = async () => {
+    this.setState({ loadingUser: true });
+    const user = await getUser();
+    this.setState({ user: user.name, loadingUser: false });
+  }
+
   render() {
-    const { name, nameHeaderLoaded } = this.props;
-    if (nameHeaderLoaded) {
+    const { loadingUser, user } = this.state;
+    if (!loadingUser) {
       return (
         <header data-testid="header-component" className="header-header">
           <div className="title-user">
@@ -15,7 +33,7 @@ class Header extends Component {
             <h1 data-testid="header-user-name">
               Bem vind@
               {' '}
-              {name}
+              {user}
             </h1>
           </div>
           <nav className="links-nav">
@@ -45,13 +63,3 @@ class Header extends Component {
 }
 
 export default Header;
-
-Header.propTypes = {
-  name: PropTypes.string,
-  nameHeaderLoaded: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  name: '',
-  nameHeaderLoaded: false,
-};
