@@ -40,8 +40,12 @@ class Search extends Component {
                 to={ `/album/${elem.collectionId}` }
               >
                 <div className="album-card">
+                  <img
+                    src={ elem.artworkUrl100 }
+                    alt={ `${elem.collectionName} ` }
+                    className="track-image"
+                  />
                   <p>{elem.collectionName}</p>
-                  <img src={ elem.artworkUrl100 } alt="" />
                   <p>{`Price ${elem.collectionPrice}`}</p>
                 </div>
 
