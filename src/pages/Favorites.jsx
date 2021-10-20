@@ -8,7 +8,7 @@ class Favorites extends Component {
     return (
       <div data-testid="page-favorites">
         <Header name={ name } nameHeaderLoaded={ nameHeaderLoaded } />
-        {/* {console.log('favorites', this.props)} */}
+        {/* {console.log('favorites', tihis.props)} */}
         <h1>Favorites</h1>
       </div>
     );

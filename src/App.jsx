@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import NotFound from './pages/NotFound';
 import { createUser, getUser } from './services/userAPI';
+import searchAlbumsAPI from './services/searchAlbumsAPI';
 import Header from './components/Header';
 
 class App extends React.Component {
@@ -18,14 +19,18 @@ class App extends React.Component {
     this.state = {
       name: '',
       artistName: '',
+      artistNameSaved: '',
       loading: false,
       namePromisse: false,
       nameHeaderLoaded: false,
+      artistCollection: [],
     };
   }
 
   componentDidMount() {
     this.getNameHeader();
+    this.getAlbum('rupaul');
+    console.log('componentDidMount', this.getAlbum('rupaul'));
   }
 
   onInputChange({ target }) {
@@ -52,8 +57,28 @@ class App extends React.Component {
     await this.setState({ loading: false });
   }
 
+  artistFunction = () => {
+    const { artistName } = this.state;
+    this.setState({ artistNameSaved: artistName });
+    this.setState({ artistName: '' });
+    // console.log(artistNameSaved);
+  }
+
+  getAlbum = async (artist) => {
+    this.setState({ loading: true });
+    await searchAlbumsAPI(artist);
+    this.setState({ loading: false });
+  }
+
   render() {
-    const { name, artistName, loading, namePromisse, nameHeaderLoaded } = this.state;
+    const {
+      name,
+      artistName,
+      artistNameSaved,
+      loading,
+      namePromisse,
+      nameHeaderLoaded,
+      artistCollection } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -70,8 +95,11 @@ class App extends React.Component {
             <Search
               name={ name }
               artistName={ artistName }
+              artistNameSaved={ artistNameSaved }
+              artistFunction={ this.artistFunction }
               nameHeaderLoaded={ nameHeaderLoaded }
               onInputChange={ this.onInputChange }
+              artistCollection={ artistCollection }
             />
           </Route>
           <Route exact path="/album/:id">
