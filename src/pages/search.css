@@ -1,0 +1,12 @@
+.collection-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.album-card {
+  align-items: center;
+  border: 1px solid black;
+  justify-content: center;
+  padding: 2px;
+  text-align: center;
+}

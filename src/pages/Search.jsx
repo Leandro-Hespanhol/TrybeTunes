@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
+import './search.css';
 // import TrackCard from '../components/TrackCard';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
@@ -10,17 +12,46 @@ class Search extends Component {
     this.state = {
       artistName: '',
       artistNameSaved: '',
+      loadingCollection: false,
+      collection: [],
     };
   }
 
-  // componentDidMount() {
-  //   this.getAlbum('pink');
-  // }
+  artistFunction = async () => {
+    const { artistName } = this.state;
+    this.setState({ loadingCollection: true, artistNameSaved: artistName });
+    const album = await searchAlbumsAPI(artistName);
+    this.setState({ loadingCollection: false, collection: album, artistName: '' });
+    console.log(album);
+  };
 
-  // getAlbum = (artist) => {
-  //   searchAlbumsAPI(artist)
-  //     .then((resp) => console.log(resp));
-  // }
+  collectionCards = () => {
+    const { collection } = this.state;
+    if (collection.length === 0) return <p>Nenhum álbum foi encontrado</p>;
+    return (
+      <div>
+        <div className="collection-container">
+
+          {
+            collection.map((elem) => (
+              <Link
+                data-testid={ `link-to-album-${elem.collectionId}` }
+                key={ elem.collectionId }
+                to={ `/album/${elem.collectionId}` }
+              >
+                <div className="album-card">
+                  <p>{elem.collectionName}</p>
+                  <img src={ elem.artworkUrl100 } alt="" />
+                  <p>{`Price ${elem.collectionPrice}`}</p>
+                </div>
+
+              </Link>
+            ))
+          }
+        </div>
+      </div>
+    );
+  }
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -30,15 +61,16 @@ class Search extends Component {
     });
   }
 
-  artistFunction = () => {
-    const { artistName } = this.state;
-    this.setState({ artistNameSaved: artistName });
-    this.setState({ artistName: '' });
-    // console.log(artistNameSaved);
-  }
+  // artistFunction = () => {
+  //   const { artistName } = this.state;
+  //   this.setState({ artistNameSaved: artistName, loadingCollection: true });
+  //   this.setState({ artistName: '' });
+  //   // console.log(artistNameSaved);
+  // }
 
   render() {
-    const { artistName, artistNameSaved } = this.state;
+    const { artistName, artistNameSaved, loadingCollection } = this.state;
+    if (loadingCollection) return <Loading />;
     return (
       <div data-testid="page-search">
         <Header />
@@ -70,7 +102,7 @@ class Search extends Component {
           { artistNameSaved }
         </div>
         <div>
-          {/* <TrackCard artistCollection={ artistCollection } /> */}
+          { this.collectionCards() }
         </div>
       </div>
     );
