@@ -1,22 +1,21 @@
 .title-user {
   align-items: center;
-  background-color: turquoise;
+  background-color: rgba(3,107,82);
   border: 2px solid black;
+  color: aliceblue;
   display: flex;
   justify-content: space-between;
 }
 
 .links-nav {
   align-items: center;
-  background-color: aqua;
+  background-color:rgb(143, 229, 209);
   display: flex;
   justify-content: center;
 }
 
 .links-nav div {
-  /* align-items: center; */
   border: 1.5px solid white;
   flex-grow: 1;
   text-align: center;
-  /* justify-content: center; */
 }
