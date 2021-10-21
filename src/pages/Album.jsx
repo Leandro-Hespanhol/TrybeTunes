@@ -4,6 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
+import './Album.css';
 
 class Album extends Component {
   constructor() {
@@ -34,20 +35,23 @@ render() {
     <div data-testid="page-album">
       <Header />
       <h1>Álbum</h1>
-      {/* {console.log('musics', musics)} */}
-      <img
-        src={ musics[0].artworkUrl100 }
-        alt={ `${musics[0].collectionName} ` }
-        className="track-image"
-      />
-      <p data-testid="artist-name">{`${musics[0].artistName}`}</p>
-      <p data-testid="album-name">{`${musics[0].collectionName}`}</p>
-      <p>{`Price ${musics[0].collectionPrice}`}</p>
-
-      <div>
-        {musics.slice(1).map((music) => (
-          <MusicCard key={ music.trackId } clasName="music" music={ music } />))}
-        {/* { this.collectionTrackCards() } */}
+      <div className="album-tracks-container">
+        <div className="div-album">
+          {/* {console.log('musics', musics)} */}
+          <img
+            src={ musics[0].artworkUrl100 }
+            alt={ `${musics[0].collectionName} ` }
+            className="track-image"
+          />
+          <p data-testid="artist-name">{`${musics[0].artistName}`}</p>
+          <p data-testid="album-name">{`${musics[0].collectionName}`}</p>
+          <p>{`Price ${musics[0].collectionPrice}`}</p>
+        </div>
+        <div>
+          {musics.slice(1).map((music) => (
+            <MusicCard key={ music.trackId } clasName="music" music={ music } />))}
+          {/* { this.collectionTrackCards() } */}
+        </div>
       </div>
     </div>
   );

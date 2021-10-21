@@ -1,0 +1,14 @@
+.album-tracks-container {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-around;
+}
+
+h1 {
+  text-align: center;
+}
+
+.track-container {
+  border: 2px solid rgb(236, 238, 236);
+  padding: 5px;
+}
