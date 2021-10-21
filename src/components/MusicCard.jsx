@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import '../pages/Album.css';
 import Loading from './Loading';
 
@@ -13,6 +13,22 @@ class MusicCard extends Component {
     };
   }
 
+  componentDidMount() {
+    this.checkFavoriteSongs();
+  }
+
+  checkFavoriteSongs = async () => {
+    const { isChecked } = this.state;
+    const { music } = this.props;
+    const bestSongs = await getFavoriteSongs();
+    bestSongs.filter((favSongs) => {
+      if (favSongs.trackId === music.trackId) {
+        this.setState({ isChecked: !isChecked });
+      }
+      return console.log();
+    });
+  }
+
   saveFavoriteSongs = async () => {
     const { music } = this.props;
     this.setState({ loadingFavorite: true });
@@ -20,7 +36,7 @@ class MusicCard extends Component {
     this.setState({ loadingFavorite: false });
   }
 
-  handleChecked = () => {
+  handleChecked = async () => {
     const { isChecked } = this.state;
     this.setState({
       isChecked: !isChecked,

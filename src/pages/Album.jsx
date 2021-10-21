@@ -4,6 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
+// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import './Album.css';
 
 class Album extends Component {
@@ -11,6 +12,7 @@ class Album extends Component {
     super();
     this.state = {
       musics: [],
+      favTracks: [],
       loadingTracks: false,
     };
   }
@@ -23,14 +25,18 @@ class Album extends Component {
 getTracks = async (param) => {
   this.setState({ loadingTracks: true });
   const tracks = await getMusics(param);
-  this.setState({ musics: [...tracks], loadingTracks: false });
+  // const favoriteTracks = await getFavoriteSongs(param);
+  this.setState({
+    musics: [...tracks],
+    // favTracks: [...favoriteTracks],
+    loadingTracks: false });
   // console.log(tracks);
 }
 
 render() {
-  const { musics, loadingTracks } = this.state;
+  const { musics, loadingTracks, favTracks } = this.state;
   if (loadingTracks || musics.length === 0) return <Loading />;
-  // const musics = musicsList.slice(1);
+  // console.log(this.state);
   return (
     <div data-testid="page-album">
       <Header />
@@ -49,7 +55,7 @@ render() {
         </div>
         <div>
           {musics.slice(1).map((music) => (
-            <MusicCard key={ music.trackId } music={ music } />))}
+            <MusicCard key={ music.trackId } music={ music } favTracks={ favTracks } />))}
           {/* { this.collectionTrackCards() } */}
         </div>
       </div>
