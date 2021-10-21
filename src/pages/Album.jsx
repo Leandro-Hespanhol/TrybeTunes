@@ -49,7 +49,7 @@ render() {
         </div>
         <div>
           {musics.slice(1).map((music) => (
-            <MusicCard key={ music.trackId } clasName="music" music={ music } />))}
+            <MusicCard key={ music.trackId } music={ music } />))}
           {/* { this.collectionTrackCards() } */}
         </div>
       </div>

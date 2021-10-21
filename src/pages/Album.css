@@ -9,6 +9,9 @@ h1 {
 }
 
 .track-container {
+  align-items: center;
   border: 2px solid rgb(236, 238, 236);
-  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 5px;
 }
