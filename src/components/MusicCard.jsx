@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class TrackCard extends Component {
+class MusicCard extends Component {
   render() {
-    const { musics } = this.props;
-    const musicList = musics.slice(1);
+    const { music: { trackName, previewUrl, trackId } } = this.props;
     return (
       <div>
         <div className="collection-track-container">
-          <img
-            src={ musicList.artworkUrl100 }
-            alt={ `${musicList.collectionName} ` }
-            className="track-image"
-          />
-          <p data-testid="artist-name">{`Artist Name ${musicList.artistName}`}</p>
-          <p data-testid="album-name">{`Collection Name ${musicList.collectionName}`}</p>
-          <p>{`Price ${musicList.collectionPrice}`}</p>
+          <p>{ trackName }</p>
+          <audio data-testid="audio-component" src={ previewUrl } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            <code>audio</code>
+          </audio>
           <div>
-            { musicList.map((elem, idx) => (
-              <div className="track-card" key={ elem.trackName }>
-                <p>{`Track Name ${idx + 1}: ${elem.trackName}`}</p>
-                <audio data-testid="audio-component" src={ elem.previewUrl } controls>
-                  <track kind="captions" />
-                </audio>
-              </div>
 
-            ))}
+            <div className="track-card" key={ trackId } />
+
           </div>
         </div>
-        {console.log('musicCard', musicList)}
+        {/* {console.log('musicCard', music)} */}
       </div>);
   }
 }
 
-export default TrackCard;
+export default MusicCard;
+
+MusicCard.propTypes = {
+  music: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.number])).isRequired,
+};
