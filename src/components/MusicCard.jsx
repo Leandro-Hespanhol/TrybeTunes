@@ -45,7 +45,7 @@ class MusicCard extends Component {
             Favorita
             <input
               type="checkbox"
-              name="name"
+              name="checked"
               id="favorite-label"
               checked={ isChecked }
               onChange={ this.handleChecked }
