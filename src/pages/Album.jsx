@@ -34,9 +34,9 @@ getTracks = async (param) => {
 }
 
 render() {
-  const { musics, loadingTracks, favTracks } = this.state;
+  const { musics, loadingTracks } = this.state;
   if (loadingTracks || musics.length === 0) return <Loading />;
-  // console.log(this.state);
+  console.log(this.state);
   return (
     <div data-testid="page-album">
       <Header />
@@ -55,7 +55,7 @@ render() {
         </div>
         <div>
           {musics.slice(1).map((music) => (
-            <MusicCard key={ music.trackId } music={ music } favTracks={ favTracks } />))}
+            <MusicCard key={ music.trackId } music={ music } />))}
           {/* { this.collectionTrackCards() } */}
         </div>
       </div>
