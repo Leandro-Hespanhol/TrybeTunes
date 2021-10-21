@@ -22,7 +22,6 @@ class Search extends Component {
     this.setState({ loadingCollection: true, artistNameSaved: artistName });
     const album = await searchAlbumsAPI(artistName);
     this.setState({ loadingCollection: false, collection: album, artistName: '' });
-    console.log(album);
   };
 
   collectionCards = () => {
