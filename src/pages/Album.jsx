@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
+import MusicCard from '../components/MusicCard';
+import Loading from '../components/Loading';
 
 class Album extends Component {
   constructor() {
     super();
     this.state = {
       musics: [],
+      loadingTracks: false,
     };
   }
 
@@ -17,57 +19,23 @@ class Album extends Component {
   }
 
 getTracks = async (param) => {
-  const { match: { params: { id } } } = this.props;
+  this.setState({ loadingTracks: true });
   const tracks = await getMusics(param);
-  this.setState({ musics: tracks });
+  this.setState({ musics: tracks, loadingTracks: false });
   // console.log(tracks);
-  return id;
-}
-
-collectionTrackCards = () => {
-  const { musics } = this.state;
-  // if (collection.length === 0) return <p>Nenhum álbum foi encontrado</p>;
-  return (
-    <div>
-      <div className="collection-track-container">
-
-        {
-          musics.map((elem) => (
-            <Link
-              data-testid={ `link-to-album-${elem.collectionId}` }
-              key={ elem.collectionId }
-              to={ `/album/${elem.collectionId}` }
-            >
-              <div className="track-card">
-                <img
-                  src={ elem.artworkUrl100 }
-                  alt={ `${elem.collectionName} ` }
-                  className="track-image"
-                />
-                <p>{`Price ${elem.collectionPrice}`}</p>
-                <p data-testid="album-name">{`Album: ${elem.collectionName}`}</p>
-                <p data-testid="artist-name">{ elem.artistName }</p>
-                {/* <p>{elem.releaseDate}</p> */}
-                <p>{`Price ${elem.collectionPrice}`}</p>
-              </div>
-
-            </Link>
-          ))
-        }
-      </div>
-    </div>
-  );
 }
 
 render() {
   const { musics } = this.state;
-  console.log('musicas', musics);
+  // if (loadingTracks && musicsList.length === 0) return <Loading />;
+  // const musics = musicsList.slice(1);
   return (
     <div data-testid="page-album">
       <Header />
       <h1>Álbum</h1>
       <div>
-        { this.collectionTrackCards() }
+        <MusicCard key={ musics.trackId } musics={ musics } />
+        {/* { this.collectionTrackCards() } */}
       </div>
     </div>
   );
