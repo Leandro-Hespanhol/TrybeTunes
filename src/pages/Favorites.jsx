@@ -26,7 +26,7 @@ class Favorites extends Component {
 
   render() {
     const { favFavSongs, loadingFavSongs } = this.state;
-    const { saveFavoriteSongs } = this.props;
+    // const { saveFavoriteSongs } = this.props;
     if (loadingFavSongs) return <Loading />;
     if (!favFavSongs) return <Loading />;
     return (
