@@ -12,7 +12,7 @@ class Album extends Component {
     super();
     this.state = {
       musics: [],
-      favTracks: [],
+      // favTracks: [],
       loadingTracks: false,
     };
   }

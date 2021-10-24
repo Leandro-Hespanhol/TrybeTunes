@@ -64,6 +64,7 @@ class MusicCard extends Component {
           <label htmlFor={ trackId }>
             Favorita
             <input
+              className="fa fa-heart"
               data-testid={ `checkbox-music-${trackId}` }
               type="checkbox"
               name="checked"
