@@ -11,17 +11,25 @@ class Favorites extends Component {
       loadingFavSongs: false,
       favFavSongs: [],
     };
+    this.getFavoritesMusics = this.getFavoritesMusics.bind(this);
   }
 
   componentDidMount() {
-    this.favoritesHtml();
+    this.getFavoritesMusics();
   }
 
-  favoritesHtml = async () => {
+  getFavoritesMusics = async () => {
     this.setState({ loadingFavSongs: true });
-    const constante = await getFavoriteSongs();
-    this.setState({ favFavSongs: [...constante] });
+    const favTracks = await getFavoriteSongs();
+    this.setState({ favFavSongs: [...favTracks] });
     this.setState({ loadingFavSongs: false });
+  }
+
+  removeSong = (trackId) => {
+    const { favFavSongs } = this.state;
+    const actualFaves = favFavSongs
+      .filter((favSong) => favSong.trackId !== trackId);
+    this.setState({ favFavSongs: actualFaves });
   }
 
   render() {
@@ -37,7 +45,7 @@ class Favorites extends Component {
           {favFavSongs.map((favSongs) => (<MusicCard
             key={ favSongs.trackId }
             music={ favSongs }
-            saveFavoriteSongs={ saveFavoriteSongs }
+            removeSongFromFavs={ this.removeSong }
           />))}
         </div>
       </div>

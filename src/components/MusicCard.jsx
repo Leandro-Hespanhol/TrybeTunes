@@ -31,12 +31,13 @@ class MusicCard extends Component {
 
   saveFavoriteSongs = async () => {
     const { isChecked } = this.state;
-    const { music } = this.props;
+    const { music, removeSongFromFavs } = this.props;
     this.setState({ loadingFavorite: true });
     if (!isChecked) {
       await addSong(music);
     } else {
       await removeSong(music);
+      removeSongFromFavs(music.trackId);
     }
     this.setState({ loadingFavorite: false });
   }
@@ -86,4 +87,5 @@ MusicCard.propTypes = {
     PropTypes.string,
     PropTypes.bool,
     PropTypes.number])).isRequired,
+  removeSongFromFavs: PropTypes.func.isRequired,
 };
