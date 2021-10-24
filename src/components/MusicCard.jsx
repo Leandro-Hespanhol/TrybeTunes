@@ -13,20 +13,33 @@ class MusicCard extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.checkFavoriteSongs();
+    // console.log('componentDidMount', await this.checkFavoriteSongs());
   }
 
-  checkFavoriteSongs = async () => {
+    checkFavoriteSongs = async () => {
+      const { isChecked } = this.state;
+      const { music } = this.props;
+      const bestSongs = await getFavoriteSongs();
+      bestSongs.forEach((favSongs) => {
+        if (favSongs.trackId === music.trackId) {
+          this.setState({ isChecked: !isChecked });
+        }
+      });
+      return bestSongs;
+    }
+
+    /* checkFavoriteSongs = async () => {
     const { isChecked } = this.state;
-    const { music } = this.props;
+    const { favTracks, music } = this.props;
     const bestSongs = await getFavoriteSongs();
     bestSongs.forEach((favSongs) => {
       if (favSongs.trackId === music.trackId) {
-        this.setState({ isChecked: !isChecked });
+        this.setState({ isChecked: !isChecked, favTracks: [...favSongs] });
       }
     });
-  }
+  } */
 
   saveFavoriteSongs = async () => {
     const { isChecked } = this.state;
@@ -49,8 +62,9 @@ class MusicCard extends Component {
 
   render() {
     const { music: { trackName, previewUrl, trackId } } = this.props;
+    // const { favTracks: { trackName, previewUrl, trackId } } = this.props;
     const { loadingFavorite, isChecked } = this.state;
-    // console.log('render', this.props);
+    // console.log('render', getFavoriteSongs());
     if (loadingFavorite) return <Loading />;
     return (
       <div>
@@ -70,6 +84,7 @@ class MusicCard extends Component {
               id={ trackId }
               onChange={ this.handleChecked }
               checked={ isChecked }
+              saveFavoriteSongs={ this.saveFavoriteSongs }
               onClick={ this.saveFavoriteSongs }
             />
           </label>
