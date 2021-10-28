@@ -16,11 +16,11 @@ class App extends React.Component {
           <Route exact path="/">
             <Login />
           </Route>
-          <Route exact path="/search">
+          <Route path="/search">
             <Search />
           </Route>
           <Route exact path="/album/:id" render={ (props) => <Album { ...props } /> } />
-          <Route exact path="/favorites">
+          <Route path="/favorites">
             <Favorites />
           </Route>
           <Route exact path="/profile">
