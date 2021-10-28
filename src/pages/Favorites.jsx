@@ -9,7 +9,7 @@ class Favorites extends Component {
     super();
     this.state = {
       loadingFavSongs: false,
-      favFavSongs: [],
+      stateFavSongs: [],
     };
     this.getFavoritesMusics = this.getFavoritesMusics.bind(this);
   }
@@ -21,28 +21,28 @@ class Favorites extends Component {
   getFavoritesMusics = async () => {
     this.setState({ loadingFavSongs: true });
     const favTracks = await getFavoriteSongs();
-    this.setState({ favFavSongs: [...favTracks] });
+    this.setState({ stateFavSongs: [...favTracks] });
     this.setState({ loadingFavSongs: false });
   }
 
   removeSong = (trackId) => {
-    const { favFavSongs } = this.state;
-    const actualFaves = favFavSongs
+    const { stateFavSongs } = this.state;
+    const actualFaves = stateFavSongs
       .filter((favSong) => favSong.trackId !== trackId);
-    this.setState({ favFavSongs: actualFaves });
+    this.setState({ stateFavSongs: actualFaves });
   }
 
   render() {
-    const { favFavSongs, loadingFavSongs } = this.state;
+    const { stateFavSongs, loadingFavSongs } = this.state;
     // const { saveFavoriteSongs } = this.props;
     if (loadingFavSongs) return <Loading />;
-    if (!favFavSongs) return <Loading />;
+    if (!stateFavSongs) return <Loading />;
     return (
       <div data-testid="page-favorites">
         <Header />
         <h1>Favorites</h1>
         <div>
-          {favFavSongs.map((favSongs) => (<MusicCard
+          {stateFavSongs.map((favSongs) => (<MusicCard
             key={ favSongs.trackId }
             music={ favSongs }
             removeSongFromFavs={ this.removeSong }

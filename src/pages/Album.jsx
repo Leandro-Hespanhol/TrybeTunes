@@ -34,7 +34,7 @@ getTracks = async (param) => {
 }
 
 render() {
-  const { musics, loadingTracks, favTracks } = this.state;
+  const { musics, loadingTracks } = this.state;
   if (loadingTracks || musics.length === 0) return <Loading />;
   console.log(this.state);
   return (
@@ -54,7 +54,11 @@ render() {
         </div>
         <div>
           {musics.slice(1).map((music) => (
-            <MusicCard key={ music.trackId } music={ music } favTracks={ favTracks } />))}
+            <MusicCard
+              key={ music.trackId }
+              music={ music }
+              removeSongFromFavs={ () => null }
+            />))}
           {/* { this.collectionTrackCards() } */}
         </div>
       </div>
@@ -72,4 +76,8 @@ Album.propTypes = {
     path: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
+};
+
+MusicCard.defaultProps = {
+  removeSongFromFavs: () => null,
 };
