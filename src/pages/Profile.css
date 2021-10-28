@@ -1,0 +1,11 @@
+.profile-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-link-div {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+}

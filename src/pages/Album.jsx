@@ -4,7 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import Loading from '../components/Loading';
-import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import './Album.css';
 
 class Album extends Component {
@@ -25,10 +25,10 @@ class Album extends Component {
 getTracks = async (param) => {
   this.setState({ loadingTracks: true });
   const tracks = await getMusics(param);
-  const favoriteTracks = await getFavoriteSongs();
+  // const favoriteTracks = await getFavoriteSongs();
   this.setState({
     musics: [...tracks],
-    favTracks: [...favoriteTracks],
+    // favTracks: [...favoriteTracks],
     loadingTracks: false });
   // console.log(tracks);
 }
@@ -36,7 +36,7 @@ getTracks = async (param) => {
 render() {
   const { musics, loadingTracks } = this.state;
   if (loadingTracks || musics.length === 0) return <Loading />;
-  console.log(this.state);
+  // console.log(this.state);
   return (
     <div data-testid="page-album">
       <Header />
