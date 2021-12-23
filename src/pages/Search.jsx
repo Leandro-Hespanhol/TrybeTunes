@@ -36,7 +36,7 @@ class Search extends Component {
               <Link
                 data-testid={ `link-to-album-${elem.collectionId}` }
                 key={ elem.collectionId }
-                to={ `/album/${elem.collectionId}` }
+                to={ `/TrybeTunes/album/${elem.collectionId}` }
               >
                 <div className="album-card">
                   <img

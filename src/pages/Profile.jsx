@@ -32,7 +32,7 @@ class Profile extends Component {
       <div className="profile-div">
         <div className="image-link-div">
           <img data-testid="profile-image" src={ image } alt={ name } />
-          <Link to="/profile/edit">Editar perfil</Link>
+          <Link to="/TrybeTunes/profile/edit">Editar perfil</Link>
         </div>
         <h2>{ name }</h2>
         <h2>{ name }</h2>

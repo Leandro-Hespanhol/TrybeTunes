@@ -32,7 +32,7 @@ class Login extends Component {
   render() {
     const { name, loading, loadPromisse } = this.state;
 
-    if (loadPromisse) return <Redirect to="/search" />;
+    if (loadPromisse) return <Redirect to="/TrybeTunes/search" />;
 
     if (loading) return <Loading />;
 

@@ -38,18 +38,18 @@ class Header extends Component {
           </div>
           <nav className="links-nav">
             <div>
-              <Link to="/search" data-testid="link-to-search">
+              <Link to="/TrybeTunes/search" data-testid="link-to-search">
                 Search
               </Link>
             </div>
             <div>
-              <Link to="/favorites" data-testid="link-to-favorites">
+              <Link to="/TrybeTunes/favorites" data-testid="link-to-favorites">
                 {' '}
                 Favorites
               </Link>
             </div>
             <div>
-              <Link to="/profile" data-testid="link-to-profile">
+              <Link to="/TrybeTunes/profile" data-testid="link-to-profile">
                 {' '}
                 Profile
               </Link>
