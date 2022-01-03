@@ -51,7 +51,7 @@
 .login-page-enter-button {
   background-color: rgba(15, 163, 107, 255);
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   font-size: 16px;
   margin-top: 5px;
