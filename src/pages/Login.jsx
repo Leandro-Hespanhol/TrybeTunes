@@ -37,11 +37,22 @@ class Login extends Component {
     if (loading) return <Loading />;
 
     return (
-      <div data-testid="page-login">
-        <h1>Login</h1>
-        <form action="">
-          <label htmlFor="login-input">
+      <div data-testid="page-login" className="login-page-body">
+        <form action="" className="login-page-fieldset">
+          <iframe
+            src="https://giphy.com/embed/tqfS3mgQU28ko"
+            title="login-gif"
+            width="480"
+            height="360"
+            frameBorder="0"
+            className="giphy-embed"
+            allowFullScreen
+          />
+
+          <h1 className="login-login">Login</h1>
+          <label htmlFor="login-input" className="login-page-label">
             <input
+              className="login-page-input"
               data-testid="login-name-input"
               type="text"
               name="name"
@@ -50,6 +61,7 @@ class Login extends Component {
             />
             <button
               type="button"
+              className="login-page-enter-button"
               data-testid="login-submit-button"
               disabled={ name.length < '3' }
               onClick={ this.loadFunction }
