@@ -11,18 +11,11 @@
 
 ### ✨ [Demo](https://leandro-hespanhol.github.io/TrybeTunes/)
 
-## Install, Usage and tests
+## Install and Usage
 
 ```sh
 npm install
-```
-
-```sh
 npm start
-```
-
-```sh
-npm run test
 ```
 ## Core Habilities: React (components with classes), state, routes.
 
